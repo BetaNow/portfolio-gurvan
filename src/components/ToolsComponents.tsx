@@ -35,12 +35,14 @@ const icons: TechnoIcon[] = [
 export const ToolsSection = () => {
   return (
     <div className={`${styles.container}`}>
+      <span className={styles.eyebrow}>Mon arsenal</span>
       <h2>Outils et logiciels</h2>
       <div className={`${styles.iconMapper}`}>
         {icons.map((icon, index) => (
           <TechnoIcon
             icon={icon.icon}
             title={icon.title}
+            index={index}
             key={index}
           ></TechnoIcon>
         ))}

@@ -117,10 +117,19 @@ const projects: Project[] = [
 export const ProjectsSection = () => {
   return (
     <div className={`${styles.container}`}>
+      <span className={styles.eyebrow}>Réalisations</span>
       <h2>Projets</h2>
       <div className={`${styles.projectMapper}`}>
         {projects.map((project, index) => (
-          <ProjectCard title={project.title} description={project.description} preview={project.preview} tags={project.tags} key={index} link={project.link}></ProjectCard>
+          <ProjectCard
+            title={project.title}
+            description={project.description}
+            preview={project.preview}
+            tags={project.tags}
+            key={index}
+            link={project.link}
+            index={index}
+          />
         ))}
       </div>
     </div>
@@ -132,23 +141,35 @@ type Project = {
   description: string;
   tags: TechnoIcon[];
   link: string;
+  index?: number;
 };
 
-export const ProjectCard = ({ title, preview, description, tags, link }: Project) => {
+export const ProjectCard = ({ title, preview, description, tags, link, index = 0 }: Project) => {
   const handleLink = () => {
     const url = link;
     window.open(url, '_blank');
   };
   return (
-    <div className={`${styles.projectCard}`} onClick={handleLink}>
-      <h3>{title}</h3>
-      <div>
+    <div
+      className={`${styles.projectCard}`}
+      onClick={handleLink}
+      role="button"
+      tabIndex={0}
+      style={{ animationDelay: `${index * 100}ms` }}
+    >
+      <div className={styles.imageWrap}>
         <Image src={preview} alt={`${title} preview`} className={`${styles.previewImage}`} />
+        <div className={styles.imageOverlay}>
+          <span className={styles.viewCta}>Voir le projet →</span>
+        </div>
+      </div>
+      <div className={styles.cardBody}>
+        <h3>{title}</h3>
         <p>{description}</p>
       </div>
       <div className={`${styles.tagContainer}`}>
-        {tags.map((tag, index) => (
-          <TagIcon icon={tag.icon} title={tag.title} key={index}></TagIcon>
+        {tags.map((tag, idx) => (
+          <TagIcon icon={tag.icon} title={tag.title} key={idx}></TagIcon>
         ))}
       </div>
     </div>

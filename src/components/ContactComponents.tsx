@@ -5,6 +5,7 @@ import styles from "./modules/ContactComponents.module.css";
 export const ContactSection = () => {
   return (
     <div className={`${styles.container}`}>
+      <span className={styles.eyebrow}>Travaillons ensemble</span>
       <h2>Intéressé.e ? Contactez-moi !</h2>
       <div className={`${styles.contactContainer}`}>
         <div className={`${styles.contactWrapper}`}>

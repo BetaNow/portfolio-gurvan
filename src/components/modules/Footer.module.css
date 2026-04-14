@@ -1,9 +1,25 @@
 .container {
   width: 100%;
-  padding: 16px;
-  background-color: var(--purple-smooth);
+  padding: 28px 24px;
+  background: linear-gradient(180deg, transparent, rgba(15, 12, 46, 0.8));
+  border-top: 1px solid var(--glass-border);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.container a {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  transition: background 250ms ease, transform 200ms ease, color 200ms ease;
+}
+.container a:hover {
+  background: var(--gradient-accent);
+  color: #fff;
+  transform: translateY(-2px);
 }

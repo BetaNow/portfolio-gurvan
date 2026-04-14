@@ -1,56 +1,145 @@
-.iconContainer img {
-  width: 96px;
-  height: auto;
+.container {
+  display: flex;
+  gap: 32px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 0;
+  width: 100%;
 }
+.eyebrow {
+  color: var(--accent-2);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.container h2 {
+  text-align: center;
+}
+.container h2::after {
+  margin: 12px auto 0;
+}
+
+.iconMapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1100px;
+}
+
 .iconContainer {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  opacity: 0;
+  animation: fadeInUp 700ms ease-out forwards;
 }
+
+.iconTile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 18px;
+  border-radius: 18px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 300ms ease, box-shadow 300ms ease, background 300ms ease;
+}
+.iconTile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity 300ms ease;
+  z-index: 0;
+}
+.iconTile img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 64px;
+  height: auto;
+  transition: transform 300ms ease;
+}
+.iconContainer:hover .iconTile {
+  transform: translateY(-6px);
+  border-color: rgba(124, 92, 255, 0.6);
+  box-shadow: 0 14px 30px rgba(124, 92, 255, 0.25);
+}
+.iconContainer:hover .iconTile::before {
+  opacity: 0.12;
+}
+.iconContainer:hover .iconTile img {
+  transform: scale(1.08);
+}
+
 .iconContainer p {
   position: absolute;
-  bottom: 110%;
+  bottom: calc(100% + 8px);
   left: 50%;
-  transform: translate(-50%, 50%);
-  background-color: var(--purple-smooth);
-  color: white;
-  padding: 8px;
-  border-radius: 4px;
+  transform: translateX(-50%) translateY(4px);
+  background: #0f0c2e;
+  border: 1px solid var(--glass-border);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
   white-space: nowrap;
   z-index: 10;
   opacity: 0;
-  transition: opacity 200ms ease-out;
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease;
 }
 .iconContainer p.infoShown {
   opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
-.iconMapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 48px;
-}
-.container {
-  display: flex;
-  gap: 36px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 32px 96px;
-}
+
 .objectiveList {
   max-width: 70ch;
-  font-size: 18px;
+  font-size: 17px;
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   text-align: justify;
+  color: #cfcde6;
+  line-height: 1.7;
 }
+.objectiveList li {
+  position: relative;
+  padding-left: 28px;
+}
+.objectiveList li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 14px;
+  height: 2px;
+  background: var(--gradient-accent);
+  border-radius: 2px;
+}
+
 @media screen and (max-width: 768px) {
   .iconMapper {
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 14px;
   }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
 }

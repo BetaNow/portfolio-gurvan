@@ -110,6 +110,7 @@ const icons: TechnoIcon[] = [
 export const TechnoSection = () => {
   return (
     <div className={`${styles.container}`}>
+      <span className={styles.eyebrow}>Ma stack</span>
       <h2>Développement FullStack</h2>
       <div className={`${styles.iconMapper}`}>
         {icons.map((icon, index) => (
@@ -117,6 +118,7 @@ export const TechnoSection = () => {
             key={index}
             icon={icon.icon}
             title={icon.title}
+            index={index}
           ></TechnoIcon>
         ))}
       </div>
@@ -140,18 +142,22 @@ export const TechnoSection = () => {
 export type TechnoIcon = {
   icon: StaticImport;
   title: string;
+  index?: number;
 };
 
-export const TechnoIcon = ({ icon, title }: TechnoIcon) => {
+export const TechnoIcon = ({ icon, title, index = 0 }: TechnoIcon) => {
   const [hover, setHover] = useState<boolean>(false);
   return (
     <div
       className={`${styles.iconContainer}`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      style={{ animationDelay: `${(index % 12) * 60}ms` }}
     >
       <p className={`${hover ? styles.infoShown : ""}`}>{title}</p>
-      <Image src={icon} alt={title + " icon"}></Image>
+      <div className={styles.iconTile}>
+        <Image src={icon} alt={title + " icon"}></Image>
+      </div>
     </div>
   );
 };
